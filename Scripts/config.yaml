@@ -1,0 +1,48 @@
+pipelines:
+  earnings_calls:
+    description: "Analyze earnings call transcripts."
+    model: "mistral"
+    rag_pipeline: "llamaindex"
+    query_parameters:
+      index_name: "earnings_call_index"
+      top_k_retrievals: 5
+
+  financial_news:
+    description: "Retrieve and generate insights from financial news articles."
+    model: "mistral"
+    rag_pipeline: "direct_text"
+    query_parameters:
+      prepend_text: "Latest financial news insights:"
+
+  regulatory_filings:
+    description: "Process and extract data from SEC filings."
+    model: "solar"
+    rag_pipeline: "custom_vector_store"
+    query_parameters:
+      vector_store_path: "/path/to/vector/store"
+      query_vector_function: "encode_query_solar"
+
+  investment_advice:
+    description: "Generate investment advice based on stock trends and metadata."
+    model: "llama3"
+    rag_pipeline: "custom_vector_store"
+    query_parameters:
+      vector_store_path: "/path/to/investment/vector/store"
+      query_vector_function: "encode_query_llama3"
+
+models:
+  rag_sequence:
+    model_name: "facebook/rag-sequence-nq"  # This is just an identifier, not used for loading
+    question_encoder_name: "facebook/dpr-question_encoder-single-nq-base"
+    generator_name: "facebook/bart-large"
+  vicuna:
+    model_name: "lmsys/vicuna-13b-v1.3"
+  mistral:
+    model_name: "mistralai/Mistral-7B-Instruct-v0.2"
+  solar:
+    model_name: "NousResearch/Nous-Hermes-2-SOLAR-10.7B"
+  llama3:
+    model_name: "meta-llama/Meta-Llama-3-8B-Instruct"
+
+default_pipeline: "financial_news"
+default_model: "mistral"
