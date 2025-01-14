@@ -53,3 +53,6 @@ Contributions to the project are welcome! Here are a few ways you can help:
 Feature Enhancements: Propose new features or improvements to the current system.
 Bug Reports: Report issues and bugs in the issue tracker.
 Documentation: Improve or suggest enhancements to documentation.
+
+## Project Report
+[View the Project Report](./Report.pdf)
